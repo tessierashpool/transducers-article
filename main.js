@@ -1,21 +1,22 @@
 const pizzas = [
-  { diametr: 25, ingridients: [] },
-  { diametr: 25, ingridients: [] },
-  { diametr: 30, ingridients: [] },
-  { diametr: 30, ingridients: [] },
-  { diametr: 35, ingridients: [] },
-  { diametr: 35, ingridients: [] },
+  { diametr: 25, ingredients: [] },
+  { diametr: 25, ingredients: [] },
+  { diametr: 30, ingredients: [] },
+  { diametr: 30, ingredients: [] },
+  { diametr: 35, ingredients: [] },
+  { diametr: 35, ingredients: [] },
 ];
 
 const arrReducer = (acc, curr) => {
-  return acc.push(curr);
+  acc.push(curr);
+  return acc;
 };
 
 const getMushroomsReducer = (reducer) => (acc, curr) => {
   return reducer(acc, { ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
 };
 const getSizeReducer = (reducer) => (acc, curr) => {
-  return curr.radius > 30 ? reducer(acc, curr) : acc;
+  return curr.diametr >= 30 ? reducer(acc, curr) : acc;
 };
 
 const mushroomsReducer = getMushroomsReducer(arrReducer);
