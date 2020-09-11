@@ -1,3 +1,5 @@
+const compose = (...funcs) => (arg) => funcs.reduceRight((acc, curr) => curr(acc), arg);
+
 const pizzas = [
   { diametr: 25, ingredients: [] },
   { diametr: 25, ingredients: [] },
@@ -19,12 +21,12 @@ const getSizeReducer = (reducer) => (acc, curr) => {
   return curr.diametr >= 30 ? reducer(acc, curr) : acc;
 };
 
-const mushroomsTranceducer  =  getMushroomsReducer;
-const sizeTranceducer  =  getSizeReducer;
+const mushroomsTranceducer = getMushroomsReducer;
+const sizeTranceducer = getSizeReducer;
 
-const mushroomsReducer = mushroomsTranceducer(arrReducer);
-const sizeReducer = sizeTranceducer(arrReducer);
+const composed = compose(sizeTranceducer, mushroomsTranceducer);
+const composedReducer = composed(arrReducer);
 
-const result = pizzas.reduce(mushroomsReducer, []).reduce(sizeReducer, []);
+const result = pizzas.reduce(composedReducer, []);
 
 console.log(result);
