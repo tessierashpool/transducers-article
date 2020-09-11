@@ -7,12 +7,13 @@ const pizzas = [
   { diametr: 35, ingridients: [] },
 ];
 
-const result = pizza
-  .reduce((acc, curr) => {
-    return acc.push({ ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
-  }, [])
-  .reduce((acc, curr) => {
-    return curr.radius > 30 ? acc.push(curr) : acc;
-  }, []);
+const mushroomsReducer = (acc, curr) => {
+  return acc.push({ ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
+};
+const sizeReducer = (acc, curr) => {
+  return curr.radius > 30 ? acc.push(curr) : acc;
+};
+
+const result = pizza.reduce(mushroomsReducer, []).reduce(sizeReducer, []);
 
 console.log(result);
