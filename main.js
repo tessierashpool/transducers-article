@@ -1,5 +1,7 @@
+// Helpers
 const compose = (...funcs) => (arg) => funcs.reduceRight((acc, curr) => curr(acc), arg);
 
+// Base Array
 const pizzas = [
   { diametr: 25, ingredients: [] },
   { diametr: 25, ingredients: [] },
@@ -9,20 +11,30 @@ const pizzas = [
   { diametr: 35, ingredients: [] },
 ];
 
+// Reducers
 const arrReducer = (acc, curr) => {
   acc.push(curr);
   return acc;
 };
 
-const getMushroomsReducer = (reducer) => (acc, curr) => {
-  return reducer(acc, { ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
-};
-const getSizeReducer = (reducer) => (acc, curr) => {
-  return curr.diametr >= 30 ? reducer(acc, curr) : acc;
+// Transformers, Predicat
+const addMushrooms = (pizza) => ({ ...pizza, ingredients: [...pizza.ingredients, 'mushrooms'] });
+const filterSmallPizza = (pizza) => pizza.diametr >= 30;
+
+// Transducers generators
+const getTranceducerMap = (transform) => (reducer) => (acc, curr) => {
+  return reducer(acc, transform(curr));
 };
 
-const mushroomsTranceducer = getMushroomsReducer;
-const sizeTranceducer = getSizeReducer;
+const getTranceducerFilter = (predicat) => (reducer) => (acc, curr) => {
+  return predicat(curr) ? reducer(acc, curr) : acc;
+};
+
+// Transducers
+const mushroomsTranceducer = getTranceducerMap(addMushrooms);
+const sizeTranceducer = getTranceducerFilter(filterSmallPizza);
+
+// Result
 
 const composed = compose(sizeTranceducer, mushroomsTranceducer);
 const composedReducer = composed(arrReducer);
