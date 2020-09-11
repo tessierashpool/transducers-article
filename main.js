@@ -7,7 +7,12 @@ const pizzas = [
   { diametr: 35, ingridients: [] },
 ];
 
-const result = pizzas
-  .map((pizza) => ({ ...pizza, ingredients: [...pizza.ingredients, 'mushrooms'] }))
-  .filter((pizza) => pizza.radius > 30)
-  .map((pizza) => ({ ...pizza, ingredients: [...pizza.ingredients, 'tomatos'] }));
+const result = pizza
+  .reduce((acc, curr) => {
+    return acc.push({ ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
+  }, [])
+  .reduce((acc, curr) => {
+    return curr.radius > 30 ? acc.push(curr) : acc;
+  }, []);
+
+console.log(result);
