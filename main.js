@@ -19,8 +19,11 @@ const getSizeReducer = (reducer) => (acc, curr) => {
   return curr.diametr >= 30 ? reducer(acc, curr) : acc;
 };
 
-const mushroomsReducer = getMushroomsReducer(arrReducer);
-const sizeReducer = getSizeReducer(arrReducer);
+const mushroomsTranceducer  =  getMushroomsReducer;
+const sizeTranceducer  =  getSizeReducer;
+
+const mushroomsReducer = mushroomsTranceducer(arrReducer);
+const sizeReducer = sizeTranceducer(arrReducer);
 
 const result = pizzas.reduce(mushroomsReducer, []).reduce(sizeReducer, []);
 
