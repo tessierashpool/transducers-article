@@ -35,7 +35,6 @@ const mushroomsTranceducer = getTranceducerMap(addMushrooms);
 const sizeTranceducer = getTranceducerFilter(filterSmallPizza);
 
 // Result
-
 const composed = compose(sizeTranceducer, mushroomsTranceducer);
 const composedReducer = composed(arrReducer);
 
