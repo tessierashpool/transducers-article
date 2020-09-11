@@ -13,7 +13,7 @@ const result = pizzas
     return acc;
   }, [])
   .reduce((acc, curr) => {
-    if (curr.diametr > 30) {
+    if (curr.diametr >= 30) {
       acc.push(curr);
     }
     return acc;
