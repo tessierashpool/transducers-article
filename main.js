@@ -1,18 +1,22 @@
 const pizzas = [
-  { diametr: 25, ingridients: [] },
-  { diametr: 25, ingridients: [] },
-  { diametr: 30, ingridients: [] },
-  { diametr: 30, ingridients: [] },
-  { diametr: 35, ingridients: [] },
-  { diametr: 35, ingridients: [] },
+  { diametr: 25, ingredients: [] },
+  { diametr: 25, ingredients: [] },
+  { diametr: 30, ingredients: [] },
+  { diametr: 30, ingredients: [] },
+  { diametr: 35, ingredients: [] },
+  { diametr: 35, ingredients: [] },
 ];
 
-const result = pizza
+const result = pizzas
   .reduce((acc, curr) => {
-    return acc.push({ ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
+    acc.push({ ...curr, ingredients: [...curr.ingredients, 'mushrooms'] });
+    return acc;
   }, [])
   .reduce((acc, curr) => {
-    return curr.radius > 30 ? acc.push(curr) : acc;
+    if (curr.diametr > 30) {
+      acc.push(curr);
+    }
+    return acc;
   }, []);
 
 console.log(result);
