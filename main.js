@@ -22,20 +22,20 @@ const addMushrooms = (pizza) => ({ ...pizza, ingredients: [...pizza.ingredients,
 const filterSmallPizza = (pizza) => pizza.diametr >= 30;
 
 // Transducers generators
-const getTranceducerMap = (transform) => (reducer) => (acc, curr) => {
+const getTransducerMap = (transform) => (reducer) => (acc, curr) => {
   return reducer(acc, transform(curr));
 };
 
-const getTranceducerFilter = (predicat) => (reducer) => (acc, curr) => {
+const getTransducerFilter = (predicat) => (reducer) => (acc, curr) => {
   return predicat(curr) ? reducer(acc, curr) : acc;
 };
 
 // Transducers
-const mushroomsTranceducer = getTranceducerMap(addMushrooms);
-const sizeTranceducer = getTranceducerFilter(filterSmallPizza);
+const mushroomsTransducer = getTransducerMap(addMushrooms);
+const sizeTransducer = getTransducerFilter(filterSmallPizza);
 
 // Result
-const composed = compose(sizeTranceducer, mushroomsTranceducer);
+const composed = compose(sizeTransducer, mushroomsTransducer);
 const composedReducer = composed(arrReducer);
 
 const result = pizzas.reduce(composedReducer, []);
