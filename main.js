@@ -33,22 +33,22 @@ const filterSmallPizza = (pizza) => pizza.diametr >= 30;
 const filterMiddlePizza = (pizza) => pizza.diametr >= 35;
 
 // Transducers generators
-const getTranceducerMap = (transform) => (reducer) => (acc, curr) => {
+const getTransducerMap = (transform) => (reducer) => (acc, curr) => {
   return reducer(acc, transform(curr));
 };
 
-const getTranceducerFilter = (predicat) => (reducer) => (acc, curr) => {
+const getTransducerFilter = (predicat) => (reducer) => (acc, curr) => {
   return predicat(curr) ? reducer(acc, curr) : acc;
 };
 
 // Transducers
-const transduserMushrooms = getTranceducerMap(addMushrooms);
-const transduserTomatoes = getTranceducerMap(addTomatoes);
-const transduserOlives = getTranceducerMap(addOlives);
-const transduserCheese = getTranceducerMap(addCheese);
+const transduserMushrooms = getTransducerMap(addMushrooms);
+const transduserTomatoes = getTransducerMap(addTomatoes);
+const transduserOlives = getTransducerMap(addOlives);
+const transduserCheese = getTransducerMap(addCheese);
 
-const transduserSmallPizza = getTranceducerFilter(filterSmallPizza);
-const transduserMiddlePizza = getTranceducerFilter(filterMiddlePizza);
+const transduserSmallPizza = getTransducerFilter(filterSmallPizza);
+const transduserMiddlePizza = getTransducerFilter(filterMiddlePizza);
 
 // Benchmark init
 const pizzas = pizzaBaseGenerator(100000);
